@@ -77,6 +77,9 @@ const KeyColumnUsage = {
   },
 };
 
+/**
+ * 数据库 context
+ */
 export default class DBContext {
   private sequelize;
   private database;
@@ -97,7 +100,10 @@ export default class DBContext {
     this.sequelize.define('referential_constraints', ReferentialConstraints);
   }
 
-  async connect() {
+  /**
+   * 连接数据库
+   */
+  public async connect() {
     try {
       await this.sequelize.authenticate();
       print('database connection succeeded!');
@@ -106,7 +112,10 @@ export default class DBContext {
     }
   }
 
-  async disconnect() {
+  /**
+   * 断开数据库连接
+   */
+  public async disconnect() {
     try {
       await this.sequelize.close();
       print('database disconnection succeeded!');
@@ -115,7 +124,13 @@ export default class DBContext {
     }
   }
 
-  async getTables(): Promise<{ tableName: string; tableComment: string }[]> {
+  /**
+   * 获取表信息
+   * @returns
+   */
+  public async getTables(): Promise<
+    { tableName: string; tableComment: string }[]
+  > {
     return this.sequelize.models.tables
       .findAll({
         where: {
@@ -131,7 +146,12 @@ export default class DBContext {
       });
   }
 
-  async getColumns(tableName: string): Promise<
+  /**
+   * 获取表字段信息
+   * @param tableName
+   * @returns
+   */
+  private async getColumns(tableName: string): Promise<
     {
       columnName: string;
       columnComment: string;
@@ -165,7 +185,13 @@ export default class DBContext {
       });
   }
 
-  async getreferentialConstraints(
+  /**
+   * 获取引用约束信息
+   * @param tableName 表名称
+   * @param type 外键类型
+   * @returns
+   */
+  private async getReferentialConstraints(
     tableName: string,
     type: 'foreignKeys' | 'references',
   ): Promise<
@@ -227,11 +253,16 @@ export default class DBContext {
     });
   }
 
-  async getTableDetails(tableName: string) {
+  /**
+   * 获取表详细信息
+   * @param tableName
+   * @returns
+   */
+  public async getTableDetails(tableName: string) {
     return Bb.props({
       columns: this.getColumns(tableName),
-      foreignKeys: this.getreferentialConstraints(tableName, 'foreignKeys'),
-      references: this.getreferentialConstraints(tableName, 'references'),
+      foreignKeys: this.getReferentialConstraints(tableName, 'foreignKeys'),
+      references: this.getReferentialConstraints(tableName, 'references'),
     });
   }
 }

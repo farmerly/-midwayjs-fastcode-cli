@@ -1,5 +1,8 @@
 import { format } from 'date-fns';
 
+/**
+ * 打印日志
+ */
 export default (msg: string, level: 'info' | 'warn' | 'error' = 'info') => {
   if (level === 'info') {
     console.log(

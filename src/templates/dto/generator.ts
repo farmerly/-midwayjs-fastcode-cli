@@ -16,10 +16,6 @@ export default class DtoGenerator extends BaseGenerator {
   ): Promise<void> {
     print(`${table.tableName} 生成 dto 文件`);
 
-    /** 获取 module 目录的绝对路径 */
-    const perfectPath = path.join(process.cwd(), modulePath);
-    if (!this.fileAccess(perfectPath)) this.mkdir(perfectPath);
-
     /** 拼装模板所需要的数据 */
     const data = {};
     _.set(data, 'className', this.pascalConvert(table.tableName));
@@ -30,6 +26,6 @@ export default class DtoGenerator extends BaseGenerator {
 
     /** 写入文件 */
     const fileName = `${this.hyphenConvert(table.tableName)}.ts`;
-    this.writeFile(path.join(perfectPath, fileName), content);
+    this.writeModuleFile(modulePath, fileName, content);
   }
 }

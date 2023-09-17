@@ -7,7 +7,7 @@ import baseOptions from '../lib/utils/yargs';
 import print from '../lib/utils/print';
 import database from '../lib/utils/database';
 import stringComplement from '../lib/utils/complement';
-import templates from '../lib/constant/template-module';
+import templates from '../lib/constant/module-templates';
 import GeneratorFactory from '../templates/generator-factory';
 
 /**

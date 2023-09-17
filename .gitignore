@@ -3,29 +3,13 @@
 /node_modules/*
 
 # Logs
-logs
-*.log
-npm-debug.log*
-pnpm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
+/logs/*
 
 # OS
 .DS_Store
 
-# Tests
-/coverage
-/.nyc_output
-
 # IDEs and editors
 /.idea
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
 
 # IDE - VSCode
 .vscode/*
@@ -36,10 +20,10 @@ lerna-debug.log*
 
 # sequelize
 .sequelizerc
-/database
+/database/*
 
 # generate files
-/src/controller
-/src/dto
-/src/entity
-/src/service
+/src/controller/*
+/src/dto/*
+/src/entity/*
+/src/service/*

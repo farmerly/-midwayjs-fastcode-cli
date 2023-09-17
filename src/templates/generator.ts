@@ -1,6 +1,10 @@
 import fs from 'fs';
 import _ from 'lodash';
+import path from 'path';
 
+/**
+ * 代码生成器基类
+ */
 export default abstract class Generator {
   /**
    * 代码生成抽象接口
@@ -19,7 +23,7 @@ export default abstract class Generator {
    * @param name 字段名
    * @returns
    */
-  camelConvert(name: string) {
+  protected camelConvert(name: string) {
     return _.camelCase(name);
   }
 
@@ -28,7 +32,7 @@ export default abstract class Generator {
    * @param name 字段名
    * @returns
    */
-  pascalConvert(name: string) {
+  protected pascalConvert(name: string) {
     return _.upperFirst(_.camelCase(name));
   }
 
@@ -36,7 +40,7 @@ export default abstract class Generator {
    * 下划线转中横线
    * @param name
    */
-  hyphenConvert(name: string) {
+  protected hyphenConvert(name: string) {
     return new String(name).replace(/_/g, '-');
   }
 
@@ -45,8 +49,24 @@ export default abstract class Generator {
    * @param name
    * @returns
    */
-  upperConvert(name: string) {
+  protected upperConvert(name: string) {
     return _.toUpper(name);
+  }
+
+  /**
+   * 写入 module 文件
+   * @param filepath
+   * @param filename
+   * @param content
+   */
+  protected writeModuleFile(
+    filepath: string,
+    filename: string,
+    content: string,
+  ) {
+    const perfectPath = path.join(process.cwd(), filepath);
+    if (!this.fileAccess(perfectPath)) this.mkdir(perfectPath);
+    this.writeFile(path.join(perfectPath, filename), content);
   }
 
   /**
@@ -54,7 +74,7 @@ export default abstract class Generator {
    * @param filepath
    * @returns
    */
-  fileAccess(filepath: string) {
+  private fileAccess(filepath: string) {
     try {
       fs.accessSync(filepath);
     } catch (error) {
@@ -70,7 +90,7 @@ export default abstract class Generator {
    * 创建文件夹
    * @param filepath
    */
-  mkdir(filepath: string) {
+  private mkdir(filepath: string) {
     try {
       if (!fs.existsSync(filepath)) {
         fs.mkdirSync(filepath);
@@ -85,7 +105,7 @@ export default abstract class Generator {
    * @param filename 文件路径
    * @param content 文件内容
    */
-  writeFile(filename: string, content: string) {
+  private writeFile(filename: string, content: string) {
     fs.writeFileSync(filename, content, { encoding: 'utf8' });
   }
 }
