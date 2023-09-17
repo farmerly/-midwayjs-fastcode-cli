@@ -5,6 +5,9 @@ import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
 
+/**
+ * dto 生成器
+ */
 export default class DtoGenerator extends BaseGenerator {
   async generate(
     table: { tableName: string; tableComment: string },

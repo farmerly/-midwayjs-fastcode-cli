@@ -5,6 +5,9 @@ import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
 
+/**
+ * service 生成器
+ */
 export default class ServiceGenerator extends BaseGenerator {
   async generate(
     table: { tableName: string; tableComment: string },

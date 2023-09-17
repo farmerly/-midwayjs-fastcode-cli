@@ -18,6 +18,9 @@ const staticFieldsGenerate = (info: {
   references: any[];
 }) => {};
 
+/**
+ * entity 生成器
+ */
 export default class EntityGenerator extends BaseGenerator {
   async generate(
     table: { tableName: string; tableComment: string },

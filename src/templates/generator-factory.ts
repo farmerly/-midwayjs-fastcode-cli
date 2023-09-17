@@ -3,8 +3,16 @@ import DtoGenerator from './dto/generator';
 import ControllerGenerator from './controller/generator';
 import ServiceGenerator from './service/generator';
 
-export default class FactoryManager {
-  getGenerator(type: string) {
+/**
+ * 代码生成器工厂
+ */
+export default class GeneratorFactory {
+  /**
+   * 创建生成器
+   * @param type
+   * @returns
+   */
+  createGenerator(type: string) {
     if (!type) return;
 
     if (type === 'entity') {

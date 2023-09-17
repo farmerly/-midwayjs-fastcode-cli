@@ -2,6 +2,12 @@ import fs from 'fs';
 import _ from 'lodash';
 
 export default abstract class Generator {
+  /**
+   * 代码生成抽象接口
+   * @param table 表信息
+   * @param info 字段、外键信息
+   * @param modulePath 代码模块路径
+   */
   abstract generate(
     table: { tableName: string; tableComment: string },
     info: { columns: any[]; foreignKeys: any[]; references: any[] },
@@ -35,7 +41,7 @@ export default abstract class Generator {
   }
 
   /**
-   * 转大写
+   * 名称转大写
    * @param name
    * @returns
    */
@@ -44,7 +50,7 @@ export default abstract class Generator {
   }
 
   /**
-   * 文件是否存在
+   * 检查文件是否存在
    * @param filepath
    * @returns
    */
