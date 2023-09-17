@@ -1,6 +1,6 @@
 {
-  "name": "@midwayjs/fastcode",
-  "version": "1.0.0",
+  "name": "midwayjs-fastcode",
+  "version": "0.0.1",
   "description": "midwayjs 代码生成器",
   "main": "index.js",
   "repository": "git@github.com:farmerly/midwayjs-fastcode.git",
@@ -38,6 +38,6 @@
     "build": "tsc"
   },
   "engines": {
-    "node": ">=12.0.1"
+    "node": ">=18.0.1"
   }
 }
