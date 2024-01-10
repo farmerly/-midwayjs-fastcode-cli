@@ -98,6 +98,8 @@ export default async (yargs) => {
     print('未找到 .sequelizerc 配置文件', 'error');
     return;
   }
+
+  // 数据库连接
   const db = new database(rcInfo, args['env']);
   await db.connect();
   const tables = await db.getTables();
